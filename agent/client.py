@@ -1,7 +1,21 @@
 """Anthropic SDK wrapper for the legal review agent."""
 
+from __future__ import annotations
+
 import anthropic
 from .prompt import build_system_prompt
+
+MAX_QUESTION_LENGTH = 5000
+
+_client: anthropic.Anthropic | None = None
+
+
+def _get_client() -> anthropic.Anthropic:
+    """Return a reusable Anthropic client instance."""
+    global _client
+    if _client is None:
+        _client = anthropic.Anthropic()
+    return _client
 
 
 def query(
@@ -20,8 +34,14 @@ def query(
 
     Returns:
         The full text response from Claude.
+
+    Raises:
+        ValueError: If the question exceeds MAX_QUESTION_LENGTH.
     """
-    client = anthropic.Anthropic()
+    if len(question) > MAX_QUESTION_LENGTH:
+        raise ValueError(f"Question too long ({len(question)} chars). Max is {MAX_QUESTION_LENGTH}.")
+
+    client = _get_client()
     system_prompt = build_system_prompt(state=state, business_type=business_type)
 
     message = client.messages.create(

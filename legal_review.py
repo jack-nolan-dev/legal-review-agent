@@ -17,7 +17,7 @@ import click
 from dotenv import load_dotenv
 
 from agent.client import query
-from agent.formatter import format_json, format_response
+from agent.formatter import parse_response, format_response
 from agent.prompt import build_system_prompt
 
 load_dotenv()
@@ -68,7 +68,7 @@ def _run_single(question, state, business_type, raw, model, no_color):
         return
 
     if raw:
-        result = format_json(response)
+        result = parse_response(response)
         click.echo(json.dumps(result, indent=2))
     else:
         formatted = format_response(response, use_color=not no_color)
@@ -112,7 +112,7 @@ def _run_interactive(state, business_type, raw, model, no_color):
             continue
 
         if raw:
-            result = format_json(response)
+            result = parse_response(response)
             click.echo(json.dumps(result, indent=2))
         else:
             formatted = format_response(response, use_color=not no_color)

@@ -1,15 +1,22 @@
 #!/usr/bin/env python3
 """MCP server that exposes the Legal Review Agent as a tool for Claude Desktop / Claude Code.
 
+Usage:
+    python mcp_server.py
+
 In MCP mode, the tool doesn't call the Anthropic API itself. Instead, it returns
 the legal knowledge base and analysis instructions as context — the Claude session
 that called the tool does the reasoning. This means users don't need a separate
 API key or credits; it works with their existing Claude Desktop or Claude Code subscription.
 """
 
+from __future__ import annotations
+
 from mcp.server.mcpserver import MCPServer
 
 from agent.prompt import build_system_prompt
+
+MAX_QUESTION_LENGTH = 5000
 
 mcp = MCPServer(
     "legal-review-agent",
@@ -40,6 +47,9 @@ def legal_review(
         business_type: Optional business type for industry-specific context (e.g., "restaurant",
                        "web agency", "healthcare startup").
     """
+    if len(question) > MAX_QUESTION_LENGTH:
+        return f"Error: Question too long ({len(question)} chars). Maximum is {MAX_QUESTION_LENGTH}."
+
     system_prompt = build_system_prompt(state=state, business_type=business_type)
 
     return f"""LEGAL REVIEW REQUEST

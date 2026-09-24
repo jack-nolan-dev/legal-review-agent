@@ -1,5 +1,7 @@
 """System prompt construction for the legal review agent."""
 
+from __future__ import annotations
+
 import os
 
 KNOWLEDGE_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "knowledge")

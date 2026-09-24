@@ -85,7 +85,7 @@ def format_response(text: str, use_color: bool = True) -> str:
     return "\n".join(formatted_lines)
 
 
-def format_json(text: str) -> dict:
+def parse_response(text: str) -> dict:
     """Parse the response into a structured dictionary.
 
     Args:
