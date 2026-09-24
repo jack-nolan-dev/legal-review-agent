@@ -54,7 +54,7 @@ Sources:
 
 ```bash
 # Clone the repo
-git clone https://github.com/jacknolan/legal-review-agent.git
+git clone https://github.com/jack-nolan-dev/legal-review-agent.git
 cd legal-review-agent
 
 # Create a virtual environment and install dependencies
@@ -121,7 +121,7 @@ This is the easiest way to use the tool — no API key needed. It works as an [M
 ### Setup (do this first)
 
 ```bash
-git clone https://github.com/jacknolan/legal-review-agent.git
+git clone https://github.com/jack-nolan-dev/legal-review-agent.git
 cd legal-review-agent
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt

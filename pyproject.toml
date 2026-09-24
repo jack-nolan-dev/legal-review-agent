@@ -35,8 +35,8 @@ dependencies = [
 legal-review = "legal_review:main"
 
 [project.urls]
-Homepage = "https://github.com/jacknolan/legal-review-agent"
-Repository = "https://github.com/jacknolan/legal-review-agent"
+Homepage = "https://github.com/jack-nolan-dev/legal-review-agent"
+Repository = "https://github.com/jack-nolan-dev/legal-review-agent"
 
 [tool.setuptools.packages.find]
 include = ["agent*"]
